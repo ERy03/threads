@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserValidation } from "@/lib/validations/user";
 import * as z from "zod";
 import Image from "next/image";
+import { ChangeEvent } from "react";
 
 interface Props {
   user: {
@@ -41,6 +42,13 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     },
   });
 
+  const handleImage = (
+    e: ChangeEvent,
+    fieldChange: (value: string) => void
+  ) => {
+    e.preventDefault();
+  };
+
   function onSubmit(values: z.infer<typeof UserValidation>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -53,6 +61,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col justify-start gap-10"
       >
+        {/* Profile Image */}
         <FormField
           control={form.control}
           name="profile_photo"
@@ -78,16 +87,25 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   />
                 )}
               </FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
+              <FormControl className="flex-1 text-base-semibold text-gray-200">
+                <Input
+                  type="file"
+                  accept="image/*"
+                  placeholder="Upload a photo"
+                  className="account-form_image-input"
+                  onChange={(e) => handleImage(e, field.onChange)}
+                />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
             </FormItem>
           )}
         />
+
+        {/* //TODO name */}
+
+        {/* //TODO username */}
+
+        {/* //TODO bio */}
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>
