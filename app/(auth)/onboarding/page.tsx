@@ -1,6 +1,19 @@
 import AccountProfile from "@/components/forms/AccountProfile";
+import { currentUser } from "@clerk/nextjs";
 
-export default function Page() {
+export default async function Page() {
+  const user = await currentUser();
+
+  const userInfo = {};
+
+  const userdata = {
+    id: user?.id,
+    objectId: userInfo?._id,
+    username: userInfo?.username || user?.username,
+    name: userInfo?.name || user?.firstName || "",
+    bio: userInfo?.bio || "",
+    image: userInfo?.image || user?.imageUrl,
+  };
   return (
     <main className="mx-auto flex flex-col max-w-3xl justify-start px-10 py-20">
       <h1 className="head-text">Onboarding</h1>
