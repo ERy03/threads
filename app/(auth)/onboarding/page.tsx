@@ -1,3 +1,5 @@
+import AccountProfile from "@/components/forms/AccountProfile";
+
 export default function Page() {
   return (
     <main className="mx-auto flex flex-col max-w-3xl justify-start px-10 py-20">
@@ -5,6 +7,10 @@ export default function Page() {
       <p className="mt-3 text-base-regular text-light-2">
         Complete your profile now to use Threads
       </p>
+
+      <section className="mt-9 p-10 bg-dark-2">
+        <AccountProfile />
+      </section>
     </main>
   );
 }
