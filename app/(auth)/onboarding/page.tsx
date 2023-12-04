@@ -6,7 +6,7 @@ export default async function Page() {
 
   const userInfo = {};
 
-  const userdata = {
+  const userData = {
     id: user?.id,
     objectId: userInfo?._id,
     username: userInfo?.username || user?.username,
@@ -22,7 +22,7 @@ export default async function Page() {
       </p>
 
       <section className="mt-9 p-10 bg-dark-2">
-        <AccountProfile />
+        <AccountProfile user={userData} btnTitle="Continue" />
       </section>
     </main>
   );
