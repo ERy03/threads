@@ -7,17 +7,17 @@ export default async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
   if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
-  console.log(userInfo);
+  const userInfo = await fetchUser(params.id);
 
   if (!userInfo?.onboarded) redirect("/onboarding");
+
   return (
     <section>
       <ProfileHeader
         accountId={userInfo.id}
         authUserId={user.id}
         name={userInfo.name}
-        userName={userInfo.username}
+        username={userInfo.username}
         imgUrl={userInfo.image}
         bio={userInfo.bio}
       />
