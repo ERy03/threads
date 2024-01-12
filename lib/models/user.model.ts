@@ -12,7 +12,10 @@ const userSchema = new mongoose.Schema({
       ref: "Thread",
     },
   ],
-  onboarded: { type: Boolean, default: false },
+  onboarded: {
+    type: Boolean,
+    default: false,
+  },
   communities: [
     {
       type: mongoose.Schema.Types.ObjectId,
