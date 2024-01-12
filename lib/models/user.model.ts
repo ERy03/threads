@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   id: { type: String, required: true },
-  userName: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   image: String,
   bio: String,
@@ -12,7 +12,10 @@ const userSchema = new mongoose.Schema({
       ref: "Thread",
     },
   ],
-  onboarded: { type: Boolean, default: false },
+  onboarded: {
+    type: Boolean,
+    default: false,
+  },
   communities: [
     {
       type: mongoose.Schema.Types.ObjectId,
