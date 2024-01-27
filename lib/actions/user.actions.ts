@@ -114,7 +114,7 @@ export async function fetchUsers({
 
     if (searchString.trim() !== "") {
       query.$or = [
-        { userName: { $regex: regex } },
+        { username: { $regex: regex } },
         { name: { $regex: regex } },
       ];
     }
