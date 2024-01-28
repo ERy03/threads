@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { formatDateString } from "@/lib/utils";
+import DeleteThread from "../forms/DeleteThread";
 
 interface Props {
   id: string;
@@ -110,7 +111,14 @@ export default function ThreadCard({
             </div>
           </div>
         </div>
-        {/* TODO delete thread */}
+        {/* delete thread */}
+        <DeleteThread
+          threadId={JSON.stringify(id)}
+          currentUserId={currentUserId}
+          authorId={author.id}
+          parentId={parentId}
+          isComment={isComment}
+        />
       </div>
       {/* show comment logo only if it's not a comment / reply */}
       {!isComment && comments.length > 0 && (
