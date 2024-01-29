@@ -1,14 +1,9 @@
 import CommunityCard from "@/components/cards/CommunityCard";
-import UserCard from "@/components/cards/UserCard";
-import ProfileHeader from "@/components/shared/ProfileHeader";
+import Pagination from "@/components/shared/Pagination";
 import Searchbar from "@/components/shared/SearchBar";
-import ThreadsTab from "@/components/shared/ThreadsTab";
-import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
-import { profileTabs } from "@/constants";
 import { fetchCommunities } from "@/lib/actions/community.actions";
-import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
+import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export default async function Page({
@@ -26,7 +21,7 @@ export default async function Page({
   // Fetch users
   const result = await fetchCommunities({
     searchString: searchParams.q,
-    pageNumber: 1,
+    pageNumber: searchParams?.page ? +searchParams.page : 1,
     pageSize: 25,
   });
 
@@ -55,6 +50,12 @@ export default async function Page({
           </>
         )}
       </div>
+
+      <Pagination
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={result.isNext}
+        path="communities"
+      />
     </section>
   );
 }
