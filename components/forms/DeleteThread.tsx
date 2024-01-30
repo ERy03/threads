@@ -22,9 +22,6 @@ function DeleteThread({
 }: Props) {
   const pathname = usePathname();
   const router = useRouter();
-  console.log("hello");
-  console.log(threadId);
-  console.log(typeof JSON.parse(threadId));
 
   // Only show delete icon if the specific thread belongs to the author and the thread card is not in the home page
   if (currentUserId !== authorId || pathname === "/") return null;
