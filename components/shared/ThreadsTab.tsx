@@ -8,12 +8,40 @@ interface Props {
   accountId: string;
   accountType: string;
 }
+
+interface Result {
+  name: string;
+  image: string;
+  id: string;
+  threads: {
+    _id: string;
+    text: string;
+    parentId: string | null;
+    author: {
+      name: string;
+      image: string;
+      id: string;
+    };
+    community: {
+      id: string;
+      name: string;
+      image: string;
+    } | null;
+    createdAt: string;
+    children: {
+      author: {
+        image: string;
+      };
+    }[];
+  }[];
+}
+
 export default async function ThreadsTab({
   currentUserId,
   accountId,
   accountType,
 }: Props) {
-  let result: any;
+  let result: Result;
 
   if (accountType === "Community") {
     result = await fetchCommunityPosts(accountId);
@@ -42,7 +70,11 @@ export default async function ThreadsTab({
                   id: thread.author.id,
                 }
           }
-          community={thread.community}
+          community={
+            accountType === "Community"
+              ? { name: result.name, id: result.id, image: result.image }
+              : thread.community
+          }
           createdAt={thread.createdAt}
           comments={thread.children}
         />
